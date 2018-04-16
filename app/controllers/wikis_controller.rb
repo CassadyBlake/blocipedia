@@ -13,9 +13,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
+    @wiki = Wiki.build(post_params)
     @wiki.user = current_user
     if @wiki.save
       flash[:notice] = "Wiki was saved."
@@ -32,8 +30,13 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.find(params[:id])
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
+    @wiki.assign_attributes(post_params)
+    authorize @wiki
+    if @wiki.update(post_params)
+      redirect_to @wiki
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -46,6 +49,11 @@ class WikisController < ApplicationController
       flash.now[:alert] = "There was an error deleting the wiki."
       render :show
     end
+  end
+
+  private
+  def post_params
+    params.require(:wiki).permit(:title, :body)
   end
 
 end
