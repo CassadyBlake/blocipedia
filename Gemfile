@@ -58,3 +58,6 @@ gem 'stripe'
 
 # sensative private environment storage
 gem 'figaro', '1.0'
+
+# markdown add to wikis
+gem 'redcarpet', '3.4.0'
