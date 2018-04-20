@@ -8,8 +8,9 @@
 
 require 'faker'
 
-10.times do
+5.times do
   User.create!(
+    username: Faker::TwinPeaks.character,
     email: Faker::Internet.unique.email,
     password: Faker::TwinPeaks.location
   )
@@ -25,9 +26,24 @@ users = User.all
 end
 
 admin = User.create!(
+  username: 'Admin User',
   email: 'admin@gmail.com',
   password: 'abc123',
   role: 'admin'
+)
+
+standard = User.create!(
+  username: 'Standard User',
+  email: 'standard@gmail.com',
+  password: 'abc456',
+  role: 'standard'
+)
+
+premium = User.create!(
+  username: 'Premium User',
+  email: 'premium@gmail.com',
+  password: 'abc789',
+  role: 'premium'
 )
 
 puts "Seed Completed"

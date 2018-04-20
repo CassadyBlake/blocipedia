@@ -50,4 +50,11 @@ gem 'devise'
 
 gem 'pundit'
 
+# seeding helper
 gem 'faker'
+
+# payment processing
+gem 'stripe'
+
+# sensative private environment storage
+gem 'figaro', '1.0'
