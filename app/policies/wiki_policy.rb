@@ -9,4 +9,6 @@ class WikiPolicy < ApplicationPolicy
   def update?
     user.admin? or wiki.user == user
   end
+
+
 end
