@@ -2,7 +2,7 @@ class WikisController < ApplicationController
   before_action :require_sign_in, except: [:show, :index]
 
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show

@@ -3,9 +3,10 @@ class CollaboratorsController < ApplicationController
 
   def create
     @wiki = Wiki.find(params[:wiki_id])
-    collaborator = @wiki.collaborators.new(params[:user_id])
+    user = User.find_by(email: params[:collaborator][:email])
+    @collaborator = Collaborator.new(wiki: @wiki, user: user)
 
-    if collaborator.save
+    if @collaborator.save
       flash[:notice] = "Collaborator added."
     else
       flash[:alert] = "Action failed. Collaborator was not added."
@@ -15,7 +16,7 @@ class CollaboratorsController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:wiki_id])
-    collaborator = @wiki.collaborators.find(params[:user_id])
+    collaborator = @wiki.collaborators.find(params[:id])
 
     if collaborator.destroy
       flash[:notice] = "Collaborator removed."
@@ -25,8 +26,8 @@ class CollaboratorsController < ApplicationController
       redirect_to @wiki
   end
 
-
   private
+
   def authorize_premium
     unless current_user.premium? || current_user.admin?
       flash[:alert] = "You must be a premium user or admin to do that."

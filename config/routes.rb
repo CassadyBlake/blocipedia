@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   delete '/users/downgrade', to: 'users#downgrade', as: :downgrade
+  #delete '/wikis/:wiki_id/collaborators/:user_id', to: 'collaborator#delete', as: :delete
 
   get 'welcome/index'
 
