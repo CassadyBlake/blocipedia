@@ -11,7 +11,7 @@ class CollaboratorsController < ApplicationController
     else
       flash[:alert] = "Action failed. Collaborator was not added."
     end
-      redirect_to @wiki
+      redirect_to edit_wiki_path(@wiki)
   end
 
   def destroy
@@ -23,7 +23,7 @@ class CollaboratorsController < ApplicationController
     else
       flash[:alert] = "Removal of collaborator failed."
     end
-      redirect_to @wiki
+      redirect_to edit_wiki_path(@wiki)
   end
 
   private
